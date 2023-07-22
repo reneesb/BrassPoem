@@ -89,10 +89,10 @@ void DisplayMenu()
         {
             AddProduct(products, productTypeId);
         }
-        //else if (menu == "4")
-        //{
-
-        //}
+        else if (menu == "4")
+        {
+            UpdateProduct(products, productTypeId);
+        }
     }
 }
 
@@ -149,7 +149,49 @@ void AddProduct(List<Product> products, List<ProductType> productTypeId)
 
 void UpdateProduct(List<Product> products, List<ProductType> productTypes)
 {
-    throw new NotImplementedException();
+    DisplayAllProducts(products, productTypeId);
+    Console.WriteLine("Which product would you like to update?");
+    int userChoice = int.Parse(Console.ReadLine());
+    int productToUpdate = userChoice - 1;
+
+    Product selectedProduct = products[productToUpdate];
+    Console.WriteLine($"You have chosen {selectedProduct} which cost {selectedProduct.Price} dollars and the product type is {selectedProduct.ProductTypeId}");
+    Console.WriteLine("New product name: ");
+    string response1 = Console.ReadLine();
+    Console.WriteLine("New product price: ");
+    string response2 = Console.ReadLine();
+    Console.WriteLine("New product type: ");
+    string response3 = Console.ReadLine();
+
+    if (!string.IsNullOrEmpty(response1)) 
+    {
+        selectedProduct.Name = response1;
+    }
+    else
+    {
+        selectedProduct = products[productToUpdate];
+    }
+    if (!string.IsNullOrEmpty(response2))
+    {
+        selectedProduct.Price = decimal.Parse(response2);
+    }
+    else
+    {
+        selectedProduct.Price= decimal.Parse(response2);
+    }
+    if (!string.IsNullOrEmpty (response3))
+    {
+        selectedProduct.ProductTypeId = int.Parse(response3);
+    }
+
+    Product updatedProduct = new Product()
+    {
+        Name = selectedProduct.Name,
+        Price = selectedProduct.Price,
+        ProductTypeId = selectedProduct.ProductTypeId,
+    };
+
+    products[productToUpdate] = updatedProduct;
 }
 
 // don't move or change this!
